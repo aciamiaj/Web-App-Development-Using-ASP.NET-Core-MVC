@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Lab3.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h1>Product List</h1>
+<a asp-action="Create">Add New Product</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+           @* <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>*@
+                <td>
+                    @{
+                        string strPrice = string.Format("{0:C2}", item.Price);
+                    }
+                    @strPrice
+                </td>
+                <td>
+
+                    @Html.ActionLink("Details", "Details", new {  id = item.ProductCode }) 
+                @*<a asp-action="Index">Back to List</a>*@
+                    </td>
+    
+        </tr>
+}
+    </tbody>
+</table>
